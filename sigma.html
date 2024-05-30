@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tab Switcher</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      position: relative;
+      background-color: #1e1e1e;
+    }
+
+    .tab-container {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      display: inline-block;
+      border-radius: 20px;
+      overflow: hidden;
+      z-index: 1;
+      background-color: #151515; /* Darker color */
+    }
+
+    .tab-switcher {
+      display: flex;
+    }
+
+    .tab-btn {
+      padding: 10px 20px;
+      background-color: #1e1e1e;
+      border: none;
+      cursor: pointer;
+      outline: none;
+      transition: background 0.3s ease;
+      color: #fff;
+    }
+
+    .tab-btn.active {
+      background-color: #2a2a2a;
+    }
+
+    .tab-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: none;
+      padding: 0;
+      overflow: hidden; /* Make content unscrollable */
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .tab-content iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .button-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 2;
+    }
+
+    .sigma-btn,
+    .fullscreen-btn {
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #1e1e1e;
+      border: none;
+      cursor: pointer;
+      outline: none;
+      transition: background 0.3s ease;
+      color: #fff;
+      border-radius: 20px;
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="button-container">
+    <button class="sigma-btn" onclick="openSigma()">⤡</button>
+    <button class="fullscreen-btn" onclick="toggleFullscreen()">⛶</button>
+  </div>
+
+  <div class="tab-container">
+    <div class="tab-switcher">
+      <button class="tab-btn active" onclick="openTab(event, 'tab1')">🌌</button>
+      <button class="tab-btn" onclick="openTab(event, 'tab2')">🧽</button>
+    </div>
+  </div>
+  
+  <div id="tab1" class="tab-content active">
+    <iframe src="https://one2-e77c.onrender.com/" frameborder="0"></iframe>
+  </div>
+  <div id="tab2" class="tab-content">
+    <iframe src="https://example.com/" frameborder="0"></iframe>
+  </div>
+<script>
+    function openTab(evt, tabName) {
+      var i, tabContent, tabBtn;
+
+      // Hide all tab content
+      tabContent = document.getElementsByClassName("tab-content");
+      for (i = 0; i < tabContent.length; i++) {
+        tabContent[i].style.display = "none";
+      }
+
+      // Remove the "active" class from all tab buttons
+      tabBtn = document.getElementsByClassName("tab-btn");
+      for (i = 0; i < tabBtn.length; i++) {
+        tabBtn[i].classList.remove("active");
+      }
+
+      // Show the specific tab content
+      document.getElementById(tabName).style.display = "block";
+
+      // Add the "active" class to the button that opened the tab
+      evt.currentTarget.classList.add("active");
+    }
+
+    function toggleFullscreen() {
+      var elem = document.documentElement;
+      if (!document.fullscreenElement) {
+        elem.requestFullscreen().catch(err => {
+          console.log(`Error attempting to enable full-screen mode: ${err.message}`);
+        });
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
+
+    function openSigma() {
+      var win = window.open('', '', 'width=9000,height=9000,top=9000,left=9000');
+      win.document.body.style.margin = '0';
+      win.document.body.style.height = '100vh';
+      var iframe = win.document.createElement('iframe');
+      iframe.style.border = 'none';
+      iframe.style.width = '100%';
+      iframe.style.height = '100%';
+      iframe.style.margin = '0';
+
+      // Check which tab is active based on tab content visibility
+      var spaceTab = document.getElementById('tab1');
+      var spongeTab = document.getElementById('tab2');
+      if (spaceTab.style.display !== "none") {
+        // If the space tab is active, load example.com
+        iframe.src = 'https://www.example.com';
+      } else if (spongeTab.style.display !== "none") {
+        // If the sponge tab is active, load example12.com
+        iframe.src = 'https://bing.com';
+      }
+
+      win.document.body.appendChild(iframe);
+    }
+</script>
+
+</body>
+</html>
