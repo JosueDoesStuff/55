@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧽⃤</title>
+    <style>
+        body {
+            background-color: #02133e;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        .logo {
+            width: 50px;
+            height: auto;
+            display: inline-block;
+            vertical-align: top;
+            animation: spin 4s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .tabs {
+            margin-top: 30px;
+        }
+        .tab {
+            display: inline-block;
+            margin-right: 20px;
+            padding: 10px 20px;
+            color: white;
+            border: 2px solid transparent;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        .tab:hover {
+            border-color: #90caf9;
+            background-color: rgba(144, 202, 249, 0.2);
+        }
+        .embed-container {
+            position: absolute;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 400px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .embed-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .logo, .embed-container {
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Logo -->
+        <img class="logo" src="https://i.imgflip.com/7b1p4b.png" alt="Logo">
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <div class="tab"></div>
+            <div class="tab"></div>
+            <div class="tab"></div>
+            <div class="tab"></div>
+            <div class="tab"></div>
+        </div>
+
+        <!-- Google Form Embed -->
+        <div class="embed-container">
+            <!-- Replace the URL with your Google Form embed URL -->
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdi4vkM_GkIy8BdZ5jjmdYjHtd4n5d-ws1E_i88rj4fnGqVFQ/viewform" width="300" height="400" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+        </div>
+    </div>
+
+</body>
+</html>
